@@ -1,7 +1,5 @@
 package com.murphy1.myrecipes.model;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Entity
