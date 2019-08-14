@@ -1,9 +1,13 @@
 package com.murphy1.myrecipes.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class Recipe {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String description;
     private Integer prepTime;
@@ -12,7 +16,20 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Notes notes;
+
+    @Lob
     private Byte[] image;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;
@@ -68,6 +85,14 @@ public class Recipe {
 
     public void setDirections(String directions) {
         this.directions = directions;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Notes notes) {
+        this.notes = notes;
     }
 
     public Byte[] getImage() {
