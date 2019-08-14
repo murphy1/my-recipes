@@ -2,4 +2,4 @@
 
 Recipe Application
 
-Develeoped with Spring
+Developed with Spring
