@@ -1,0 +1,7 @@
+package com.murphy1.myrecipes.repositories;
+
+import com.murphy1.myrecipes.model.UnitOfMeasure;
+import org.springframework.data.repository.CrudRepository;
+
+public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long> {
+}
