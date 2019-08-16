@@ -22,6 +22,12 @@ public class Ingredient {
 
     }
 
+    public Ingredient(String description, Double amount, UnitOfMeasure unitOfMeasure){
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeasure = unitOfMeasure;
+    }
+
     public Ingredient(String description, Double amount, UnitOfMeasure unitOfMeasure, Recipe recipe){
         this.description = description;
         this.amount = amount;
@@ -29,4 +35,11 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 }

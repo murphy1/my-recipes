@@ -107,12 +107,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         Notes guacNote = new Notes();
         guacNote.setRecipeNotes("2 Mash with a fork: Using a fork, roughly mash the avocado. (Don't overdo it! The guacamole should be a little chunky.)");
-        guacNote.setRecipe(guacamole);
         guacamole.setNotes(guacNote);
 
-        guacamole.getIngredients().add(new Ingredient("Avocado", 2.0, eachUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("Serrano Chili", 3.0, eachUom, guacamole));
-        guacamole.getIngredients().add(new Ingredient("Kosher Salt", 2.0, pinchUom, guacamole));
+        guacamole.addIngredient(new Ingredient("Avocado", 2.0, eachUom));
+        guacamole.addIngredient(new Ingredient("Serrano Chili", 3.0, eachUom));
+        guacamole.addIngredient(new Ingredient("Kosher Salt", 2.0, pinchUom));
 
         guacamole.setDifficulty(Difficulty.EASY);
 
