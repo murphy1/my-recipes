@@ -1,7 +1,10 @@
 package com.murphy1.myrecipes.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 public class Ingredient {
 
@@ -35,11 +38,4 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }

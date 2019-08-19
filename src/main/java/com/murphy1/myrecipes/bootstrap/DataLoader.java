@@ -4,12 +4,14 @@ import com.murphy1.myrecipes.model.*;
 import com.murphy1.myrecipes.repositories.CategoryRepository;
 import com.murphy1.myrecipes.repositories.RecipeRepository;
 import com.murphy1.myrecipes.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Slf4j
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -26,6 +28,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
+        log.info("onApplicationEvent method called!");
     }
 
     private List<Recipe> getRecipes(){
