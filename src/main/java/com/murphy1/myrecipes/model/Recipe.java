@@ -22,8 +22,11 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
+    @Lob
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
