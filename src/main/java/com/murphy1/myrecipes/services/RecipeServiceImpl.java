@@ -4,6 +4,7 @@ import com.murphy1.myrecipes.model.Recipe;
 import com.murphy1.myrecipes.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -37,5 +38,12 @@ public class RecipeServiceImpl implements RecipeService{
         }
 
         return returnedRecipe.get();
+    }
+
+    @Override
+    @Transactional
+    public Recipe saveRecipe(Recipe recipe) {
+        Recipe savedRecipe = recipeRepository.save(recipe);
+        return savedRecipe;
     }
 }

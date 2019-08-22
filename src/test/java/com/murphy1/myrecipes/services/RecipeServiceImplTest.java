@@ -39,4 +39,16 @@ class RecipeServiceImplTest {
         assertNotNull(returnedRecipe);
         verify(recipeRepository, times(1)).findById(anyLong());
     }
+
+    @Test
+    void saveRecipe(){
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeRepository.save(any())).thenReturn(recipe);
+        Recipe returnedRecipe = recipeRepository.save(recipe);
+
+        assertNotNull(returnedRecipe);
+        verify(recipeRepository, times(1)).save(any());
+    }
 }
