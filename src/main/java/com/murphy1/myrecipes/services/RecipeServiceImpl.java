@@ -5,6 +5,7 @@ import com.murphy1.myrecipes.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -28,6 +29,13 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     public Recipe findRecipeById(Long l){
-        return null;
+
+        Optional<Recipe> returnedRecipe = recipeRepository.findById(l);
+
+        if(!returnedRecipe.isPresent()){
+            throw new RuntimeException("Recipe not found!");
+        }
+
+        return returnedRecipe.get();
     }
 }
