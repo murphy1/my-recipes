@@ -65,4 +65,16 @@ class RecipeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipes/2/show"));
     }
+
+    @Test
+    void updateRecipe() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findRecipeById(anyLong())).thenReturn(recipe);
+        Recipe returnedRecipe = recipeService.findRecipeById(1L);
+
+        assertNotNull(returnedRecipe);
+        verify(recipeService, times(1)).findRecipeById(anyLong());
+    }
 }
