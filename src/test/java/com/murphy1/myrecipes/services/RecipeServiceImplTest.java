@@ -51,4 +51,11 @@ class RecipeServiceImplTest {
         assertNotNull(returnedRecipe);
         verify(recipeRepository, times(1)).save(any());
     }
+
+    @Test
+    void deleteRecipeById() throws Exception{
+        recipeRepository.deleteById(anyLong());
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
 }
