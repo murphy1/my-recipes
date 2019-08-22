@@ -26,4 +26,8 @@ public class RecipeServiceImpl implements RecipeService{
         return recipeSet;
 
     }
+
+    public Recipe findRecipeById(Long l){
+        return null;
+    }
 }
