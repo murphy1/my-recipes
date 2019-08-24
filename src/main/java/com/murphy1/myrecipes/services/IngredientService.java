@@ -4,4 +4,5 @@ import com.murphy1.myrecipes.model.Ingredient;
 
 public interface IngredientService {
     Ingredient getIngredientById(Long recipeId, Long ingredientId);
+    //Ingredient save(Ingredient ingredient);
 }
