@@ -8,6 +8,7 @@ import com.murphy1.myrecipes.services.RecipeService;
 import com.murphy1.myrecipes.services.UnitOfMeasureService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.mockito.Mockito.*;
 
 class IngredientControllerTest {
@@ -83,6 +85,22 @@ class IngredientControllerTest {
                 .andExpect(view().name("/recipes/ingredient/ingredientform"))
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uomList"));
+    }
+
+    @Test
+    void saveIngredientTest() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(1L);
+        ingredient.setRecipe(recipe);
+
+        when(ingredientService.saveIngredient(any())).thenReturn(ingredient);
+
+        mockMvc.perform(post("/recipe/1/ingredient"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipes/1/ingredient/1/show"));
+
     }
 
 }

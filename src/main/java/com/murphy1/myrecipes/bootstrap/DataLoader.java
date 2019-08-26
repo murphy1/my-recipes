@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 @Slf4j
@@ -126,9 +127,13 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "For a deviled egg version with guacamole, try our Guacamole Deviled Eggs!");
         guacamole.setNotes(guacNote);
 
-        guacamole.addIngredient(new Ingredient("Avocado", 2.0, eachUom));
-        guacamole.addIngredient(new Ingredient("Serrano Chili", 3.0, eachUom));
-        guacamole.addIngredient(new Ingredient("Kosher Salt", 2.0, pinchUom));
+        Ingredient ingredient = new Ingredient("Avocado", 2.0, eachUom, guacamole);
+        Ingredient ingredient1 = new Ingredient("Serrano Chili", 3.0, eachUom, guacamole);
+        Ingredient ingredient2 = new Ingredient("Kosher Salt", 2.0, pinchUom, guacamole);
+
+        guacamole.addIngredient(ingredient);
+        guacamole.addIngredient(ingredient1);
+        guacamole.addIngredient(ingredient2);
 
         guacamole.setDifficulty(Difficulty.EASY);
 

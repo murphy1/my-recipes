@@ -3,6 +3,7 @@ package com.murphy1.myrecipes.services;
 import com.murphy1.myrecipes.model.Ingredient;
 import com.murphy1.myrecipes.model.Recipe;
 import com.murphy1.myrecipes.repositories.RecipeRepository;
+import com.murphy1.myrecipes.repositories.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -12,19 +13,51 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class IngredientServiceImplTest {
 
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    UnitOfMeasureRepository uomRepository;
+
+    @Mock
+    Recipe recipeMock;
+
     IngredientServiceImpl service;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        service = new IngredientServiceImpl(recipeRepository);
+        service = new IngredientServiceImpl(recipeRepository, uomRepository);
     }
+
+    @Test
+    void getIngredientByIdTest() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(1L);
+        Ingredient ingredient1 = new Ingredient();
+        ingredient.setId(2L);
+
+        Set<Ingredient> ingredients = new HashSet<>();
+        ingredients.add(ingredient);
+        ingredients.add(ingredient1);
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(anyLong());
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        when(recipeMock.getIngredients()).thenReturn(ingredients);
+        Set<Ingredient> returnedIngredients =  recipe.getIngredients();
+
+        assertNotNull(recipeOptional);
+        assertNotNull(ingredients);
+        verify(recipeRepository, times(1)).findById(anyLong());
+    }
+
 }
