@@ -110,4 +110,24 @@ class IngredientControllerTest {
                 .andExpect(view().name("redirect:/"));
     }
 
+    @Test
+    void newIngredientTest() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(1L);
+        ingredient.setRecipe(recipe);
+
+        when(recipeService.findRecipeById(anyLong())).thenReturn(recipe);
+        Recipe returnedRecipe = recipeService.findRecipeById(anyLong());
+
+        verify(recipeService, times(1)).findRecipeById(anyLong());
+
+        mockMvc.perform(get("/recipe/1/ingredient/new"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeExists("ingredient", "uomList"))
+                .andExpect(view().name("recipes/ingredient/ingredientform"));
+    }
+
 }

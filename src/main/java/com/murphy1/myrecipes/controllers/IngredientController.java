@@ -1,6 +1,8 @@
 package com.murphy1.myrecipes.controllers;
 
 import com.murphy1.myrecipes.model.Ingredient;
+import com.murphy1.myrecipes.model.Recipe;
+import com.murphy1.myrecipes.model.UnitOfMeasure;
 import com.murphy1.myrecipes.services.IngredientService;
 import com.murphy1.myrecipes.services.RecipeService;
 import com.murphy1.myrecipes.services.UnitOfMeasureService;
@@ -61,6 +63,22 @@ public class IngredientController {
         ingredientService.deleteIngredient(new Long(ingredientId));
 
         return "redirect:/";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model){
+        Recipe recipe = recipeService.findRecipeById(new Long(recipeId));
+
+        Ingredient ingredient = new Ingredient();
+        ingredient.setRecipe(recipe);
+
+        model.addAttribute("ingredient", ingredient);
+
+        ingredient.setUnitOfMeasure(new UnitOfMeasure());
+
+        model.addAttribute("uomList", uomService.uomList());
+
+        return "recipes/ingredient/ingredientform";
     }
 
 }
