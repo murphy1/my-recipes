@@ -2,6 +2,7 @@ package com.murphy1.myrecipes.services;
 
 import com.murphy1.myrecipes.model.Ingredient;
 import com.murphy1.myrecipes.model.Recipe;
+import com.murphy1.myrecipes.repositories.IngredientRepository;
 import com.murphy1.myrecipes.repositories.RecipeRepository;
 import com.murphy1.myrecipes.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +17,12 @@ public class IngredientServiceImpl implements IngredientService {
 
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository uomRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public IngredientServiceImpl(RecipeRepository recipeRepository, UnitOfMeasureRepository uomRepository) {
+    public IngredientServiceImpl(RecipeRepository recipeRepository, UnitOfMeasureRepository uomRepository, IngredientRepository ingredientRepository) {
         this.recipeRepository = recipeRepository;
         this.uomRepository = uomRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     @Override
@@ -76,5 +79,10 @@ public class IngredientServiceImpl implements IngredientService {
 
         return savedRecipe.getIngredients().stream()
                 .filter(ingredient1 -> ingredient1.getId().equals(ingredient.getId())).findFirst().get();
+    }
+
+    @Override
+    public void deleteIngredient(Long ingredientId) {
+        ingredientRepository.deleteById(ingredientId);
     }
 }

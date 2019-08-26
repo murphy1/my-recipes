@@ -2,6 +2,7 @@ package com.murphy1.myrecipes.services;
 
 import com.murphy1.myrecipes.model.Ingredient;
 import com.murphy1.myrecipes.model.Recipe;
+import com.murphy1.myrecipes.repositories.IngredientRepository;
 import com.murphy1.myrecipes.repositories.RecipeRepository;
 import com.murphy1.myrecipes.repositories.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,9 @@ class IngredientServiceImplTest {
     UnitOfMeasureRepository uomRepository;
 
     @Mock
+    IngredientRepository ingredientRepository;
+
+    @Mock
     Recipe recipeMock;
 
     IngredientServiceImpl service;
@@ -32,7 +36,7 @@ class IngredientServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        service = new IngredientServiceImpl(recipeRepository, uomRepository);
+        service = new IngredientServiceImpl(recipeRepository, uomRepository, ingredientRepository);
     }
 
     @Test
@@ -58,6 +62,16 @@ class IngredientServiceImplTest {
         assertNotNull(recipeOptional);
         assertNotNull(ingredients);
         verify(recipeRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void deleteIngredientTest() throws Exception{
+        Ingredient ingredient = new Ingredient();
+        ingredient.setId(1L);
+
+        ingredientRepository.deleteById(1L);
+
+        verify(ingredientRepository, times(1)).deleteById(anyLong());
     }
 
 }
